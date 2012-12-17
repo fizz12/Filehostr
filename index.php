@@ -1,7 +1,7 @@
 <?php
 require_once 'g.php';
 $pagetitle = 'Uploader Index';
-require_once 'header.php';
+require_once 'inc/header.php';
 ?>
 <div id="uploadform">
 	<form id="upload" action="upload.php" method="post" enctype="multipart/form-data">
@@ -10,6 +10,4 @@ require_once 'header.php';
 	</form>
 </div>
 
-<?php require_once 'footer.php';?>
-</body>
-</html>
+<?php require_once 'inc/footer.php';?>

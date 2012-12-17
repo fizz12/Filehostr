@@ -1,10 +1,30 @@
 <?php
 // Global file
 // contains database info, constants, and necessary global functions
+error_reporting(E_ALL ^ E_NOTICE); // Show all errors except notices
 
 /** Constant Defines **/
-define('ROOTDIR', 'uploadsite'); // IMPORTANT! Change this to the root foldername of your Uploader script
+define('ROOT_DIR', 'uploadsite'); // IMPORTANT! Change this to the root foldername of your Uploader script
+define('ROOT_PATH', dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+define('URL', 'http://localhost'); // Root url of your site with no trailing slash, ex: http://www.mysite.com
 define('NAME', 'Upl0ader'); // Name of your site
+
+/** Uploaded File Settings **/
+define('UPLOAD_DIR', 'uploads'); // Directory where files are uploaded to, no slashes
+define('UPLOAD_LOGFILE', 'upload_error_log'); // Filename of log to write uploading errors to
+$allowedExtensions = array('png', 'jpg', 'bmp', 'jpeg', 'gif', 'txt'); // Allowed file extensions, DO NOT INCLUDE THE DOT (.)
+
+define('MAX_FILESIZE', 5242880); // Max filesize limit in bytes, default is 5MB. You will need to change the upload_max_filesize setting in php.ini to match this at least
+if(ini_get('upload_max_filesize') != '10M') // Change '10M' to the exact value you enter in ini_set below to save resources
+	ini_set('upload_max_filesize', "10M"); // Sets upload_max_filesize in php.ini. Must be greater than or equal to MAX_FILESIZE constant above. M stands for megabytes, K for kilo, and G for gigabytes
+
+define('MAX_INPUT_TIME', 60); // Time upload is allowed to take to complete, needs to be less than or equal to the setting in php.ini
+if(intval(ini_get('max_input_time')) < 60) // Change 60 to the exact value of ini_set below to save resources
+	ini_set('max_input_time', '60'); // Sets the max input time in seconds in php.ini. Must be greater than or equal to MAX_INPUT_TIME constant
+
+define('POST_MAX_SIZE', 2097180); // This needs to be greater than or equal to MAX_FILESIZE
+if(ini_get('post_max_size') != '10M') // Change '10M' to the exact value in ini_set below to save resources
+	ini_set('post_max_size', '10M'); // Needs to be greater than or equal to upload_max_filesize setting in php.ini
 
 /** Database Info and Connection (uses MySQL with PDO) **/
 $host = 'localhost'; // Your MySQL host
@@ -12,19 +32,19 @@ $dbname = 'uploader'; // Your MySQL database name
 $dbuser = 'upladmin'; // Your MySQL database username
 $dbpass = 'YLeUXwhQjT5HYJbG'; // Your MySQL user password
 $dblogfile = 'PDO_error_log'; // Filename that PDO errors are written to (.txt automatically appended)
-/*if(is_dir('logs'))
-	chmodDirectory('logs', 0600);
-elseif(substr(sprintf("%o",fileperms("logs")),-4) != '0600')
-	chmod('logs', 0600);*/
+
 // Don't mess with anything below this line unless you know what you're doing ---
 try{
 	$db = new PDO("mysql:host=$host;dbname=$dbname", $dbuser, $dbpass);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	if(!is_dir("logs")) // make logs directory if it doesn't exist already
+		mkdir("logs", 0600);
 }
 catch(PDOexception $e){
 	echo "Database connection error.<br />";
 	if(!is_dir("logs")) // make logs directory if it doesn't exist already
-		mkdir("logs", 0600);
+		@mkdir("logs", 0600);
 
 	if(file_put_contents("logs/$dblogfile.txt", $e->getMessage() .' '. date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND))
 		echo "Successfully logged error. Error is: ".$e->getMessage(); // *** REMOVE THE ERROR IS: PART AND DELETE THIS COMMENT FOR RELEASE ***
@@ -36,6 +56,25 @@ catch(PDOexception $e){
 /** Globally Accessible Functions **/
 
 /**
+ * Generate a new filename for a user-submitted file
+ *
+ * @return String the file name
+ * @author fizz12
+ **/
+function GenerateFilename()
+{
+	$len = 8; // Char length of filename, change to whatever you want, though I recommend at least 5 or 6.
+	$chars = '0987654321poiuytrewqlkjhgfdsamnbvcxz_';
+	$return = '';
+
+	for($i=0;$i<$len;$i++)
+	{
+		$return .= $chars[mt_rand(0, strlen($chars)-1)];
+	}
+	return $return;
+}
+
+/**
  * chmod all the files within a directory and the directory itself
  *
  * String $dir: name of directory to chmod (include slashes if further than one directory from root)
@@ -43,7 +82,7 @@ catch(PDOexception $e){
  * @return 1 on success, 0 on failure
  * @author fizz12
  **/
-function chmodDirectory($dir, $perms=0600)
+function ChmodDirectory($dir, $perms=0600)
 {
 	$logfile = 'chmodDirectory_error_log'; // Filename of error log for this function only
 	#$dir = dirname(__FILE__).DIRECTORY_SEPARATOR.$dir;
