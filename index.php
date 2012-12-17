@@ -1,5 +1,5 @@
 <?php
-require_once 'inc/g.php';
+require_once 'g.php';
 $pagetitle = 'Uploader Index';
 require_once 'header.php';
 ?>

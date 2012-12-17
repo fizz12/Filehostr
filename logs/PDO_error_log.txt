@@ -1,0 +1,6 @@
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:33
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:34
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:35
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:35
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:36
+SQLSTATE[42000] [1044] Access denied for user 'upladmin'@'localhost' to database '3uploader' Dec-17-2012 22:10:37
