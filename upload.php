@@ -7,10 +7,10 @@ require_once 'inc/header.php';
 
 $ext = end(explode(".", $_FILES["file"]["name"]));
 
-if(!is_dir(UPLOAD_DIR))
-{
+if(!is_dir(UPLOAD_DIR)) // Make sure upload directory exists and is writeable, otherwise create it
 	mkdir(UPLOAD_DIR, 0744);
-}
+elseif(substr(sprintf("%o",fileperms(UPLOAD_DIR)),-4) != 0744)
+	chmod(UPLOAD_DIR, 0744);
 
 if((($_FILES["file"]["type"] == "image/gif")  /** These are allowed MIME types. Full list to add your own: http://www.iana.org/assignments/media-types/index.html **/
 || ($_FILES["file"]["type"] == "image/jpeg")
