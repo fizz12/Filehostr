@@ -8,9 +8,9 @@ require_once 'inc/header.php';
 $ext = end(explode(".", $_FILES["file"]["name"]));
 
 if(!is_dir(UPLOAD_DIR)) // Make sure upload directory exists and is writeable, otherwise create it
-	mkdir(UPLOAD_DIR, 0744);
-elseif(substr(sprintf("%o",fileperms(UPLOAD_DIR)),-4) != 0744)
-	chmod(UPLOAD_DIR, 0744);
+	mkdir(UPLOAD_DIR, 0500);
+elseif(substr(sprintf("%o",fileperms(UPLOAD_DIR)),-4) != 0500)
+	chmod(UPLOAD_DIR, 0500);
 
 if((($_FILES["file"]["type"] == "image/gif")  /** These are allowed MIME types. Full list to add your own: http://www.iana.org/assignments/media-types/index.html **/
 || ($_FILES["file"]["type"] == "image/jpeg")
@@ -31,7 +31,7 @@ if((($_FILES["file"]["type"] == "image/gif")  /** These are allowed MIME types. 
 		echo "Type: " . $_FILES["file"]["type"] . "<br>";
 		echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
 		echo "Stored in: " . $_FILES["file"]["tmp_name"] . '<br />';
-		$realname = $_FILES['file']['name']; // Make this var store the actual user entered title of the file
+		$realname = $_FILES['file']['name']; // Store the actual user entered title of the file
 		$newname = GenerateFilename() . ".$ext"; // Generate a new filename for this file and store it in this var
 		// Now store file
 		if(!file_exists(UPLOAD_DIR . DIRECTORY_SEPARATOR . $newname))
@@ -39,7 +39,8 @@ if((($_FILES["file"]["type"] == "image/gif")  /** These are allowed MIME types. 
 			$newloc = dirname(__FILE__) . DIRECTORY_SEPARATOR . UPLOAD_DIR . DIRECTORY_SEPARATOR . $newname;
 			if(@move_uploaded_file($_FILES['file']['tmp_name'], $newloc))
 			{
-				echo "File uploaded to: ".URL.DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$newname;
+				if(chmod($newloc, 0500))
+					echo "File uploaded to: ".URL.'/'.UPLOAD_DIR."/$newname";
 			}
 			else
 			{

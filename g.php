@@ -22,7 +22,7 @@ define('MAX_INPUT_TIME', 60); // Time upload is allowed to take to complete, nee
 if(intval(ini_get('max_input_time')) < 60) // Change 60 to the exact value of ini_set below to save resources
 	ini_set('max_input_time', '60'); // Sets the max input time in seconds in php.ini. Must be greater than or equal to MAX_INPUT_TIME constant
 
-define('POST_MAX_SIZE', 2097180); // This needs to be greater than or equal to MAX_FILESIZE
+define('POST_MAX_SIZE', 6291456); // This needs to be greater than or equal to MAX_FILESIZE
 if(ini_get('post_max_size') != '10M') // Change '10M' to the exact value in ini_set below to save resources
 	ini_set('post_max_size', '10M'); // Needs to be greater than or equal to upload_max_filesize setting in php.ini
 
@@ -58,13 +58,13 @@ catch(PDOexception $e){
 /**
  * Generate a new filename for a user-submitted file
  *
+ * Int $len: character length of generated filename
  * @return String the file name
  * @author fizz12
  **/
-function GenerateFilename()
+function GenerateFilename($len=8)
 {
-	$len = 8; // Char length of filename, change to whatever you want, though I recommend at least 5 or 6.
-	$chars = '0987654321poiuytrewqlkjhgfdsamnbvcxz_';
+	$chars = '0987654321poiuytrewqlkjhgfdsamnbvcxz_QWERTYUIOPASDFGHJKLZXCVBNM';
 	$return = '';
 
 	for($i=0;$i<$len;$i++)
@@ -77,7 +77,7 @@ function GenerateFilename()
 /**
  * chmod all the files within a directory and the directory itself
  *
- * String $dir: name of directory to chmod (include slashes if further than one directory from root)
+ * String $dir: name of directory to chmod (include slashes ONLY if further than one directory from root)
  * Int $perms: file permissions to change to (ex: 0600, 0777), default 0600 (owner read/write only, denied for everyone else)
  * @return 1 on success, 0 on failure
  * @author fizz12
@@ -87,12 +87,12 @@ function ChmodDirectory($dir, $perms=0600)
 	$logfile = 'chmodDirectory_error_log'; // Filename of error log for this function only
 	#$dir = dirname(__FILE__).DIRECTORY_SEPARATOR.$dir;
 	if(!is_dir($dir) || !is_numeric($perms)) // Make sure $dir is actually a directory and $perms is at least numeric
-		return;
+		return 0;
 	else
 	{
 		if(!chmod($dir, $perms)) // chmod the directory itself
 		{
-			file_put_contents("logs/$logfile.txt", "Failed to chmod directory: $dir ". date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND);
+			file_put_contents("logs/$logfile.txt", "Failed to chmod directory [$dir] to [$perms].". date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND);
 			return 0;
 		}
 	}
@@ -115,6 +115,11 @@ function ChmodDirectory($dir, $perms=0600)
 		closedir($h);
 		echo "Success!";
 		return 1;
+	}
+	else
+	{
+		file_put_contents("logs/$logfile.txt", "Failed to open directory [Given: $dir].". date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND);
+		return 0;
 	}
 }
 ?>
