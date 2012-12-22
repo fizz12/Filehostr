@@ -1,5 +1,5 @@
 Uploading site project: upload and distribute files freely.
-Copyright (C) 2012  fizz12@github.com
+Copyright (C) 2012  https://github.com/fizz12
 
 Author Email: Lam3r[at]hotmail[dot]com
 
