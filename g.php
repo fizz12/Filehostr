@@ -39,7 +39,7 @@ try{
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	if(!is_dir("logs")) // make logs directory if it doesn't exist already
-		mkdir("logs", 0600);
+		@mkdir("logs", 0600);
 }
 catch(PDOexception $e){
 	echo "Database connection error.<br />";
