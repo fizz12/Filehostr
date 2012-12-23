@@ -30,7 +30,7 @@ if(ini_get('post_max_size') != '10M') // Change '10M' to the exact value in ini_
 $host = 'localhost'; // Your MySQL host
 $dbname = 'uploader'; // Your MySQL database name
 $dbuser = 'upladmin'; // Your MySQL database username
-$dbpass = 'YLeUXwhQjT5HYJbG'; // Your MySQL user password
+$dbpass = 'bPMLzq8uhn5bph8B'; // Your MySQL user password
 $dblogfile = 'PDO_error_log'; // Filename that PDO errors are written to (.txt automatically appended)
 
 // Don't mess with anything below this line unless you know what you're doing ---

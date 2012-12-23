@@ -1,0 +1,8 @@
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:19:58
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:21:20
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:22:10
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:23:30
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:23:32
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:24:36
+SQLSTATE[HY000] [1045] Access denied for user 'upladmin'@'localhost' (using password: YES) Dec-23-2012 23:24:56
+SQLSTATE[HY000] [1044] Access denied for user 'upladmin'@'localhost' to database 'uploader' Dec-23-2012 23:25:36

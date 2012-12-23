@@ -9,7 +9,7 @@ require_once 'inc/header.php';
 	background-color: #fff;
 	padding: 20px 0px 15px 0px;
 	border: 1px solid #e5e5e5;
-	margin: 0 auto 20px;
+	margin: 30px auto 20px;
 	text-align: center;
 
 	-webkit-border-radius: 10px;
@@ -38,9 +38,9 @@ require_once 'inc/header.php';
 <div class="container">
 	<div class="upload">
 		<form class="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
-			<h2 class="upload-heading">Upload</h2><br />
+			<h2 class="upload-heading">Upload to <?php echo NAME;?>!</h2><br />
 			<input type="file" name="file" id="file" style="display:none">
-			<input type="text" id="pretty-input" class="input-large" readonly placeholder="Upload a file..."><a class="btn upload-browse" onclick="$('input[id=file]').click();">Browse</a><br />
+			<input type="text" id="pretty-input" class="input-large"  placeholder="Upload a file..." onclick="$('input[id=file]').click();"><a class="btn upload-browse" onclick="$('input[id=file]').click();">Browse</a><br />
 			<input type="submit" name="submitupload" value="Submit" class="btn btn-primary" />
 		</form>
 		<div id="login">
