@@ -10,7 +10,7 @@ define('URL', 'http://localhost'); // Root url of your site with no trailing sla
 define('NAME', 'Upl0ader'); // Name of your site
 
 /** Uploaded File Settings **/
-define('UPLOAD_DIR', 'uploads'); // Directory where files are uploaded to, no slashes
+define('UPLOAD_DIR', 'uploads'); // Directory where files are uploaded to, no slashes. **You must manually change this in the .htaccess file as well!**
 define('UPLOAD_LOGFILE', 'upload_error_log'); // Filename of log to write uploading errors to
 $allowedExtensions = array('png', 'jpg', 'bmp', 'jpeg', 'gif', 'txt'); // Allowed file extensions, DO NOT INCLUDE THE DOT (.)
 
@@ -22,7 +22,7 @@ define('MAX_INPUT_TIME', 60); // Time upload is allowed to take to complete, nee
 if(intval(ini_get('max_input_time')) < 60) // Change 60 to the exact value of ini_set below to save resources
 	ini_set('max_input_time', '60'); // Sets the max input time in seconds in php.ini. Must be greater than or equal to MAX_INPUT_TIME constant
 
-define('POST_MAX_SIZE', 6291456); // This needs to be greater than or equal to MAX_FILESIZE
+define('POST_MAX_SIZE', 6291456); // This needs to be greater than or equal to MAX_FILESIZE, in bytes
 if(ini_get('post_max_size') != '10M') // Change '10M' to the exact value in ini_set below to save resources
 	ini_set('post_max_size', '10M'); // Needs to be greater than or equal to upload_max_filesize setting in php.ini
 
@@ -39,12 +39,12 @@ try{
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	if(!is_dir("logs")) // make logs directory if it doesn't exist already
-		@mkdir("logs", 0600);
+		@mkdir("logs", 0500);
 }
 catch(PDOexception $e){
 	echo "Database connection error.<br />";
 	if(!is_dir("logs")) // make logs directory if it doesn't exist already
-		@mkdir("logs", 0600);
+		@mkdir("logs", 0500);
 
 	if(file_put_contents("logs/$dblogfile.txt", $e->getMessage() .' '. date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND))
 		echo "Successfully logged error. Error is: ".$e->getMessage(); // *** REMOVE THE ERROR IS: PART AND DELETE THIS COMMENT FOR RELEASE ***

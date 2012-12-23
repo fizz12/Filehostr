@@ -35,9 +35,21 @@ require_once 'inc/header.php';
 	padding: 5px;
 }
 </style>
+
+<!-- Basic jQuery input checking... -->
+<script type="text/javascript">
+$("#upload-form").submit(function() {
+	if($("#file").val().length<4) {
+		alert("Please enter a file to be submitted.");
+		return false;
+	}else{
+		return true;
+	}
+});
+</script>
 <div class="container">
 	<div class="upload">
-		<form class="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
+		<form class="upload-form" id="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
 			<h2 class="upload-heading">Upload to <?php echo NAME;?>!</h2><br />
 			<input type="file" name="file" id="file" style="display:none">
 			<input type="text" id="pretty-input" class="input-large"  placeholder="Upload a file..." onclick="$('input[id=file]').click();"><a class="btn upload-browse" onclick="$('input[id=file]').click();">Browse</a><br />

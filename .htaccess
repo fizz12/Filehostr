@@ -1,0 +1,5 @@
+RedirectMatch 403 ^.*/logs/$
+RedirectMatch 403 ^.*/logs/.*$
+
+RedirectMatch 403 ^.*/uploads/$
+RedirectMatch 403 ^.*/uploads/.*$
