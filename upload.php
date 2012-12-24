@@ -31,11 +31,11 @@ if($_POST['submitupload'] == 'Submit')
 		}
 		else // No errors, process file
 		{
-			echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-			echo "Type: " . $_FILES["file"]["type"] . "<br>";
-			echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+			echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+			echo "Type: " . $_FILES["file"]["type"] . "<br />";
+			echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br />";
 			echo "Stored in: " . $_FILES["file"]["tmp_name"] . '<br />';
-			$realname = $_FILES['file']['name']; // Store the actual user entered title of the file
+			$realname = htmlentities($_FILES['file']['name']); // Store the actual user entered title of the file
 			$newname = GenerateFilename() . ".$ext"; // Generate a new filename for this file and store it in this var
 			// Now store file
 			if(!file_exists(UPLOAD_DIR . DIRECTORY_SEPARATOR . $newname))

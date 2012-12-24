@@ -5,7 +5,7 @@ error_reporting(E_ALL ^ E_NOTICE); // Show all errors except notices
 
 /** Constant Defines **/
 define('ROOT_DIR', 'uploadsite'); // IMPORTANT! Change this to the root foldername of your Uploader script
-define('URL', 'http://localhost'); // Root url of your site with no trailing slash, ex: http://www.mysite.com
+define('URL', 'http://localhost/uploadsite'); // Root url of your site with no trailing slash, ex: http://www.mysite.com
 define('NAME', 'Filehostr'); // Name of your site
 
 /** Uploaded File Settings **/
@@ -83,7 +83,7 @@ function GenerateFilename($len=8)
  **/
 function ChmodDirectory($dir, $perms=0600)
 {
-	$logfile = 'chmodDirectory_error_log'; // Filename of error log for this function only
+	$logfile = 'ChmodDirectory_error_log'; // Filename of error log for this function only
 	#$dir = dirname(__FILE__).DIRECTORY_SEPARATOR.$dir;
 	if(!is_dir($dir) || !is_numeric($perms)) // Make sure $dir is actually a directory and $perms is at least numeric
 		return 0;

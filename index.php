@@ -36,17 +36,6 @@ require_once 'inc/header.php';
 }
 </style>
 
-<!-- Basic jQuery input checking... -->
-<script type="text/javascript">
-$("#upload-form").submit(function() {
-	if($("#file").val().length<4) {
-		alert("Please enter a file to be submitted.");
-		return false;
-	}else{
-		return true;
-	}
-});
-</script>
 <div class="container">
 	<div class="upload">
 		<form class="upload-form" id="upload-form" action="upload.php" method="post" enctype="multipart/form-data">
@@ -65,6 +54,21 @@ $("#upload-form").submit(function() {
 <script type="text/javascript">
 $('input[id=file]').change(function(){
 	$('#pretty-input').val($(this).val());
+});
+
+$("#upload-form").submit(function() {
+	var file = $('#file').val();
+	if(file.length<4 || file == "") {
+		alert("Please enter a file to be submitted.");
+		return false;
+	}
+	else if($(this).lastIndexOf(".") <= 0) {
+		alert("Please enter a valid file.");
+		return false;
+	}
+	else {
+		return true;
+	}
 });
 </script>
 
