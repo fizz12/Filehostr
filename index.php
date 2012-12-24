@@ -61,7 +61,7 @@ $("#upload-form").submit(function() {
 	</div>
 </div>
 
-<!-- Workaround for Boostrap's lack of a file input button (thanks http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/) -->
+<!-- Workaround for Bootstrap's lack of a file input button (thanks http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/) -->
 <script type="text/javascript">
 $('input[id=file]').change(function(){
 	$('#pretty-input').val($(this).val());

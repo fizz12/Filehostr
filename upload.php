@@ -74,9 +74,26 @@ else
 }
 require_once 'inc/footer.php';
 
+
+/** Functions used only within upload.php **/
+
+/**
+ * Move a freshly uploaded file to its new location on the server and rename it
+ *
+ * String $file: The file to be moved & renamed
+ * String $ext: The file extension (don't include the .)
+ * @return String The name of the new file on success, Int 0 on failure
+ * @author fizz12
+ **/
+function MoveFile($file, $ext){}
+
 /* TO DO:
 * File upload progress bar!!!
+* Javascript input checks on index (need to be in a js file with a named function)
+* Fix upload.php so that moving uploaded file to newloc is a function (so that if the filename already exists it can regen a new one)
 * Make files go to uploads/userid/file.ext once user is logged in (if not logged in stay in uploads/file.ext)
+* Logging function for errors and shit (in g.php) --> replace all old logging calls with new function
+* Sanitize file input (filename and such so they can't inject shit with the uploader)
 * Membership system
 * Viewing and downloading files
 * Admin panel to view/delete files, view/modify/delete users

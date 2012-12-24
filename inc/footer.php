@@ -13,7 +13,9 @@
 	/*border: 1px solid red;*/
 }
 .license {
+	color: gray;
 	text-align: center;
+	font-size: .8em;
 	/*border: 1px solid green;*/
 }
 </style>

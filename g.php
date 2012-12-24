@@ -5,9 +5,8 @@ error_reporting(E_ALL ^ E_NOTICE); // Show all errors except notices
 
 /** Constant Defines **/
 define('ROOT_DIR', 'uploadsite'); // IMPORTANT! Change this to the root foldername of your Uploader script
-define('ROOT_PATH', dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
 define('URL', 'http://localhost'); // Root url of your site with no trailing slash, ex: http://www.mysite.com
-define('NAME', 'Upl0ader'); // Name of your site
+define('NAME', 'Filehostr'); // Name of your site
 
 /** Uploaded File Settings **/
 define('UPLOAD_DIR', 'uploads'); // Directory where files are uploaded to, no slashes. **You must manually change this in the .htaccess file as well!**
