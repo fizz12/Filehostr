@@ -20,11 +20,12 @@
 }
 </style>
 <div class="footer span9">
+	<hr />
 	<div class="row-fluid">
-		<div class="copyright span4">
-			Developed by <a href="http://github.com/fizz12/uploader" target="_BLANK">fizz12</a> &copy; 2012 <?php echo NAME;?>.
+		<div class="copyright span5">
+			Developed by <a href="http://github.com/fizz12/uploader" target="_BLANK">fizz12</a>. &copy; 2012 <a href="<?php echo URL;?>"><?php echo NAME;?></a>. All rights reserved.
 		</div>
-		<div class="span5 offset3 license">
+		<div class="span4 offset3 license">
 			This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_BLANK">Creative Commons Attribution 3.0 Unported License</a>.
 			<br />
 			<a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_BLANK"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a>
