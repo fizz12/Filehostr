@@ -13,7 +13,7 @@ elseif(substr(sprintf("%o",fileperms(UPLOAD_DIR)),-4) != 0500)
 
 if($_POST['submitupload'] == 'Submit')
 {
-	$ext = explode(".", strtolower($_FILES["file"]["name"]));
+	$ext = explode(".", strip_tags(htmlentities(trim($_FILES["file"]["name"]))));
 	$ext = strtolower(end($ext));
 
 	if((($_FILES["file"]["type"] == "image/gif")  /** These are allowed MIME types. Full list to add your own: http://www.iana.org/assignments/media-types/index.html **/
@@ -35,7 +35,7 @@ if($_POST['submitupload'] == 'Submit')
 			echo "Type: " . $_FILES["file"]["type"] . "<br />";
 			echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br />";
 			echo "Stored in: " . $_FILES["file"]["tmp_name"] . '<br />';
-			$realname = htmlentities($_FILES['file']['name']); // Store the actual user entered title of the file
+			$realname = htmlentities(strip_tags(trim($_FILES['file']['name']))); // Store the actual user entered title of the file
 			$newname = GenerateFilename() . ".$ext"; // Generate a new filename for this file and store it in this var
 			// Now store file
 			if(!file_exists(UPLOAD_DIR . DIRECTORY_SEPARATOR . $newname))
@@ -82,20 +82,19 @@ require_once 'inc/footer.php';
  *
  * String $file: The file to be moved & renamed
  * String $ext: The file extension (don't include the .)
+ * Integer $uid: The user ID of the user that is uploading the file (Leave empty if uploaded by guest)
  * @return String The name of the new file on success, Int 0 on failure
  * @author fizz12
  **/
-function MoveFile($file, $ext){}
+function MoveFile($file, $ext, $uid=0){}
 
 /* TO DO:
-* File upload progress bar!!!
-* Javascript input checks on index (need to be in a js file with a named function)
 * Fix upload.php so that moving uploaded file to newloc is a function (so that if the filename already exists it can regen a new one)
 * Make files go to uploads/userid/file.ext once user is logged in (if not logged in stay in uploads/file.ext)
-* Logging function for errors and shit (in g.php) --> replace all old logging calls with new function
-* Sanitize file input (filename and such so they can't inject shit with the uploader)
+* Logging function for errors and shit (in g.php) --> replace all old logging calls with new functions
 * Membership system
 * Viewing and downloading files
+* File upload progress bar!!!
 * Admin panel to view/delete files, view/modify/delete users
 * Statistics to monitor how much people download, bandwidth usage, etc.
 */

@@ -46,7 +46,7 @@ catch(PDOexception $e){
 		@mkdir("logs", 0500);
 
 	if(file_put_contents("logs/$dblogfile.txt", $e->getMessage() .' '. date("M-d-Y H:i:s") . PHP_EOL, FILE_APPEND))
-		echo "Successfully logged error. Error is: ".$e->getMessage(); // *** REMOVE THE ERROR IS: PART AND DELETE THIS COMMENT FOR RELEASE ***
+		echo "Successfully logged error."
 	else
 		echo "Failed to write error to log.";
 }
@@ -121,4 +121,13 @@ function ChmodDirectory($dir, $perms=0600)
 		return 0;
 	}
 }
+
+/**
+ * Get Username from given UID
+ *
+ * Integer $uid: The User ID we want to find the associated username of
+ * @return String Username
+ * @author fizz12
+ **/
+function UidToName($uid){}
 ?>

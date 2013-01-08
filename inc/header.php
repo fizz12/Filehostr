@@ -5,7 +5,6 @@
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script src="inc/js/main.js"></script>
 <style type="text/css">
 body {
 	background-color: #f5f5f5;
